@@ -33,8 +33,8 @@ const resultFromWorker = document.querySelector(".js-result__worker")
 // This makes a piece of text for us to put in the DOM.
 const makeResultString = duration => `<strong>${duration.toFixed(2)}</strong>ms on average.`
 
-// We run calculations a LOT OF TIMES (in this case, 200) to block the DOM real bad to make a point.
-const limit = 200
+// We run calculations a LOT OF TIMES (in this case, 100) to block the DOM real bad to make a point.
+const limit = 100
 
 // This executes when you click the "RUN IN BROWSER" button.
 function runInBrowser(data, count = 0, durations = []) {
