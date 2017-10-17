@@ -33,6 +33,9 @@ const resultFromWorker = document.querySelector(".js-result__worker")
 // This makes a piece of text for us to put in the DOM.
 const makeResultString = duration => `<strong>${duration.toFixed(2)}</strong>ms on average.`
 
+// We run calculations a LOT OF TIMES (in this case, 500) to block the DOM real bad to make a point.
+const limit = 500
+
 // This executes when you click the "RUN IN BROWSER" button.
 function runInBrowser(data, count = 0, durations = []) {
   const startTime = performance.now() // make a note of when we started
@@ -56,7 +59,7 @@ function runInBrowser(data, count = 0, durations = []) {
   resultFromBrowser.innerHTML = makeResultString(averageTime)
 
   // If the function has been called 1000 times, STAHP! (stop)
-  if (count >= 1000) return
+  if (count >= limit) return
 
   /*
     If not, call it again from inside. This is called recursion.
@@ -106,7 +109,7 @@ function runInWorker(data, count = 0, durations = []) {
     resultFromWorker.innerHTML = makeResultString(averageTime)
 
     // If the function has been called 1000 times, STAHP!
-    if (count >= 1000) return
+    if (count >= limit) return
 
     // If not, call it again from inside.
     runInWorker(data, 1 + count, [...durations, duration])
