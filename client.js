@@ -33,8 +33,8 @@ const resultFromWorker = document.querySelector(".js-result__worker")
 // This makes a piece of text for us to put in the DOM.
 const makeResultString = duration => `<strong>${duration.toFixed(2)}</strong>ms on average.`
 
-// We run calculations a LOT OF TIMES (in this case, 500) to block the DOM real bad to make a point.
-const limit = 500
+// We run calculations a LOT OF TIMES (in this case, 100) to block the DOM real bad to make a point.
+const limit = 100
 
 // This executes when you click the "RUN IN BROWSER" button.
 function runInBrowser(data, count = 0, durations = []) {
@@ -49,7 +49,7 @@ function runInBrowser(data, count = 0, durations = []) {
 
   /*
     We keep an array of all durations (3rd argument of this function), and keep adding
-    to it each time it's called. See line 66.
+    to it each time it's called. See line 69.
 
     To get the average time, reduce each duration to its sum, and divide it by its total length.
   */
@@ -92,7 +92,7 @@ function runInWorker(data, count = 0, durations = []) {
 
   /*
     The worker talks back! WOOO! When it does, how do we handle what it says?
-    This is how. It sends back an event just like the one described on line 83.
+    This is how. It sends back an event just like the one described on line 86.
 
     So, we look in event.data and deal with it appropriately.
     In this case, I programmed the worker (see worker.js) to send back an object with
