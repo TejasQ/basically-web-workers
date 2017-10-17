@@ -1,0 +1,39 @@
+<html lang="en">
+  <head>
+    <title>🤖 Basically, Web Workers</title>
+    <link href="/index.css" rel="stylesheet">
+    <meta name="viewport" content="user-scalable=0,width=device-width,initial-scale=1">
+  </head>
+  <body>
+    <header>
+      <h1>Basically, Web Workers&nbsp;&nbsp;🤖 </h1>
+      <p>Web Workers are little helper scripts that are executed <em>off the main thread</em> of your browser and therefore don't block things, particularly the current active document, or the DOM.</p>
+      <p>To see what this looks like <em>inreallife</em>, click the button below to perform a complex calculation <em>in the browser</em>, and then contrast it with performing the <em>same calculation</em> in a worker, while observing this GIF.</p>
+    </head>
+    <main>
+      <img alt="Demo Image" src="barack.gif">
+      <table class="table">
+        <thead>
+        <tr>
+          <td class="table__left">Action</td>
+          <td>Status</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><button class="js-action__run-in-browser">Run in Browser</button></td>
+          <td class="js-result__browser"></td>
+        </tr>
+        <tr>
+          <td><button class="js-action__run-in-worker">Run in Worker</button></td>
+          <td class="js-result__worker"></td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Notice how speed-wise, it doesn't really vary very much. In fact, in most cases, it is actually <em>slower</em> to execute a worker because it is quite expensive to copy over a dataset from the browser into a worker, and then back from a worker into the browser. That said, workers <em>really</em> help <em>not annoy your users with slow, blocking processing.</em></p>
+    <p><strong>Further reading:</strong> there's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Worker">more kinds of workers and a lot more to read and explore</a>. I hope this helped you!</p>
+    </main>
+    <script src="data.js"></script>
+    <script src="client.js"></script>
+  </body>
+</html>
