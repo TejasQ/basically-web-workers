@@ -8,10 +8,11 @@
     <header>
       <h1>Basically, Web Workers&nbsp;&nbsp;🤖 </h1>
       <p>Web Workers are little helper scripts that are executed <em>off the main thread</em> of your browser and therefore don't block things, particularly the current active document, or the DOM.</p>
-      <p>To see what this looks like <em>inreallife</em>, click the button below to perform a complex calculation <em>in the browser</em>, and then contrast it with performing the <em>same calculation</em> in a worker, while observing this GIF.</p>
+      <p>To see what this looks like <em>inreallife</em>, click the <a href="#barack">button below</a> to perform a complex calculation <em>in the browser</em>, and then contrast it with performing the <em>same calculation</em> in a worker, while observing this GIF.</p>
+      <p>Tapping "run in browser" repeatedly will help see the DOM being blocked.</p>
     </head>
     <main>
-      <img alt="Demo Image" src="barack.gif">
+      <img id="barack" alt="Demo Image" src="barack.gif">
       <table class="table">
         <thead>
         <tr>
@@ -21,7 +22,11 @@
       </thead>
       <tbody>
         <tr>
-          <td><button class="js-action__run-in-browser">Run in Browser</button></td>
+          <td>
+            <button class="js-action__run-in-browser">Run in Browser</button>
+            <br>
+            <small>Tap repeatedly to emphasize pausing.</small>
+          </td>
           <td class="js-result__browser"></td>
         </tr>
         <tr>
