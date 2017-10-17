@@ -7,3 +7,7 @@ This _fairly trivial_ project seeks to be a pleasant welcome for newcomers to th
 The project is basically a GIF of this boss dropping a mic, that presents two buttons that both do _incredibly expensive_ calculations. One button does it in the browser, blocking the webpage (DOM) and effectively _pausing_ things, leading to jank and unpleasantness. The other button delegates the calculation to a Web Worker, leaving the DOM nice and interactive.
 
 This is literally just meant to be a POC and nothing too serious.
+
+## Ok but how do i learn about web workers
+
+THE SOURCE CODE IS NOT SCARY! Go through it. Start in [client.js](https://github.com/TejasQ/basically-web-workers/blob/master/client.js) and go from there. Really, I'd say there are 3 relevant files: [index.html](https://github.com/TejasQ/basically-web-workers/blob/master/index.html) for the structure, [client.js](https://github.com/TejasQ/basically-web-workers/blob/master/client.js) for the actual execution, and [worker.js](https://github.com/TejasQ/basically-web-workers/blob/master/worker.js) to show you how easy workers really are. GO READ IT'S FUN REALLY!
