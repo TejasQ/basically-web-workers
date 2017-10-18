@@ -91,7 +91,7 @@ thead {
 
 button {
   width: 100%;
-  max-width: 140px;
+  max-width: 160px;
   padding: calc(var(--spacing)/2);
   border: 0;
   font-size: 1rem;

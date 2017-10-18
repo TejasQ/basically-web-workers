@@ -12,7 +12,8 @@ if (typeof Worker === "undefined") {
 // ...anyway,
 
 // Get the buttons from the webpage (aka the DOM).
-const runInBrowserButton = document.querySelector(".js-action__run-in-browser")
+const runInBrowserSyncButton = document.querySelector(".js-action__run-in-browser-sync")
+const runInBrowserAsyncButton = document.querySelector(".js-action__run-in-browser-async")
 const runInWorkerButton = document.querySelector(".js-action__run-in-worker")
 
 /*
@@ -23,11 +24,13 @@ const runInWorkerButton = document.querySelector(".js-action__run-in-worker")
 
   Basically, when button is "click"ed, () => doWhateverIsHere(withThis)
 */
-runInBrowserButton.addEventListener("click", () => runInBrowser(data))
+runInBrowserSyncButton.addEventListener("click", () => runInBrowserSync(data))
+runInBrowserAsyncButton.addEventListener("click", () => runInBrowserAsync(data))
 runInWorkerButton.addEventListener("click", () => runInWorker(data))
 
 // Get the result boxes from the DOM.
-const resultFromBrowser = document.querySelector(".js-result__browser")
+const resultFromBrowserSync = document.querySelector(".js-result__browser-sync")
+const resultFromBrowserAsync = document.querySelector(".js-result__browser-async")
 const resultFromWorker = document.querySelector(".js-result__worker")
 
 // This makes a piece of text for us to put in the DOM.
@@ -36,8 +39,20 @@ const makeResultString = duration => `<strong>${duration.toFixed(2)}</strong>ms 
 // We run calculations a LOT OF TIMES (in this case, 100) to block the DOM real bad to make a point.
 const limit = 100
 
+// Asynchronous version of the JSON.parse/1 function
+const parseJSONAsync = string =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        resolve(JSON.parse(string));
+      } catch (error) {
+        reject(error);
+      }
+    }, 0)
+  });
+
 // This executes when you click the "RUN IN BROWSER" button.
-function runInBrowser(data, count = 0, durations = []) {
+function runInBrowserSync(data, count = 0, durations = []) {
   const startTime = performance.now() // make a note of when we started
 
   // Parse the data.
@@ -56,7 +71,7 @@ function runInBrowser(data, count = 0, durations = []) {
   const averageTime = durations.reduce((acc, duration) => acc + duration, 0) / durations.length
 
   // We update the result in the DOM here.
-  resultFromBrowser.innerHTML = makeResultString(averageTime)
+  resultFromBrowserSync.innerHTML = makeResultString(averageTime)
 
   // If the function has been called 1000 times, STAHP! (stop)
   if (count >= limit) return
@@ -66,7 +81,41 @@ function runInBrowser(data, count = 0, durations = []) {
     It can be called a more declarative, functional approach to iteration (loops) because
     it's basically saying: here's _what I want to do_, instead of, here's _how to do it_.
   */
-  runInBrowser(data, 1 + count, [...durations, duration])
+  runInBrowserSync(data, 1 + count, [...durations, duration])
+}
+
+// This executes when you click the "RUN IN BROWSER ASYNC" button.
+async function runInBrowserAsync(data, count = 0, durations = []) {
+  const startTime = performance.now() // make a note of when we started
+
+  // Parse the data.
+  // It's actually slower than the synchronous version but doesn't block the main thread.
+  // So in general feels "faster" and smoother.
+  await parseJSONAsync(data)
+
+  const endTime = performance.now() // make a note of when we ended
+  const duration = endTime - startTime // diff them to figure out how long it took
+
+  /*
+    We keep an array of all durations (3rd argument of this function), and keep adding
+    to it each time it's called. See line 69.
+
+    To get the average time, reduce each duration to its sum, and divide it by its total length.
+  */
+  const averageTime = durations.reduce((acc, duration) => acc + duration, 0) / durations.length
+
+  // We update the result in the DOM here.
+  resultFromBrowserAsync.innerHTML = makeResultString(averageTime)
+
+  // If the function has been called 1000 times, STAHP! (stop)
+  if (count >= limit) return
+
+  /*
+    If not, call it again from inside. This is called recursion.
+    It can be called a more declarative, functional approach to iteration (loops) because
+    it's basically saying: here's _what I want to do_, instead of, here's _how to do it_.
+  */
+  runInBrowserAsync(data, 1 + count, [...durations, duration])
 }
 
 // This executes when you click the "RUN IN WORKER" button.
