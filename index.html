@@ -8,8 +8,8 @@
     <header>
       <h1>Basically, Web Workers&nbsp;&nbsp;🤖 </h1>
       <p>Web Workers are little helper scripts that are executed <em>off the main thread</em> of your browser and therefore don't block things, particularly the current active document, or the DOM.</p>
-      <p>To see what this looks like <em>inreallife</em>, click the <a href="#barack">button below</a> to perform a complex calculation <em>in the browser</em>, and then contrast it with performing the <em>same calculation</em> in a worker, while observing this GIF.</p>
-      <p>Tapping "run in browser" repeatedly will help see the DOM being blocked.</p>
+      <p>To see what this looks like <em>inreallife</em>, click the <a href="#barack">button below</a> to perform a complex calculation <em>in the browser</em>, and then contrast it with performing the <em>same calculation</em> asynchronously and also in a worker, while observing this GIF.</p>
+      <p>Tapping "run in browser sync" repeatedly will help see the DOM being blocked.</p>
     </head>
     <main>
       <img id="barack" alt="Demo Image" src="barack.gif">
@@ -23,11 +23,15 @@
       <tbody>
         <tr>
           <td>
-            <button class="js-action__run-in-browser">Run in Browser</button>
+            <button class="js-action__run-in-browser-sync">Run in Browser Sync</button>
             <br>
             <small>Tap repeatedly to emphasize pausing.</small>
           </td>
-          <td class="js-result__browser"></td>
+          <td class="js-result__browser-sync"></td>
+        </tr>
+        <tr>
+          <td><button class="js-action__run-in-browser-async">Run in Browser Async</button></td>
+          <td class="js-result__browser-async"></td>
         </tr>
         <tr>
           <td><button class="js-action__run-in-worker">Run in Worker</button></td>
