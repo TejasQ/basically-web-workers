@@ -1,4 +1,4 @@
-# Basically, [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) 🤖
+# _Basically_, [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) 🤖
 
 This _fairly trivial_ project seeks to be a pleasant welcome for newcomers to the world of Web Workers, showing what they do: in code, and in a demo, as well as highlighting potential use cases and pitfalls. You can either [see it live](https://tejasq.github.io/basically-web-workers) or clone it yourself and open `index.html` in a [http-server](https://github.com/indexzero/http-server) or something similar. Wooooooo!
 
